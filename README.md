@@ -30,7 +30,7 @@ Welcome aboard! This project is a modern redesign of the IRCTC platform, aiming 
 Get started by cloning the repository and installing the necessary dependencies:
 
 ```bash
-git clone https://github.com/your-username/redesign-irctc.git
+git clone https://github.com/Garvit1000/redesign-irctc.git
 cd redesign-irctc
 npm install
 ```
