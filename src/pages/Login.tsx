@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, User, Lock, ArrowRight, Train, CheckCircle } from 'lucide-react';
@@ -240,23 +239,23 @@ const Login = () => {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
       
-      <main className="flex-1 flex items-center justify-center py-10 bg-gradient-to-b from-blue-50 via-white to-white">
+      <main className="flex-1 flex items-center justify-center py-6 md:py-10 bg-gradient-to-b from-blue-50 via-white to-white">
         <div className="w-full max-w-4xl mx-auto px-4">
           <div className={cn("flex flex-col lg:flex-row overflow-hidden rounded-xl shadow-lg border border-border", polishedEntrance(""))}>
-            {/* Left side: Illustration/Info */}
-            <div className="lg:w-5/12 bg-primary/5 p-8 lg:p-12 flex flex-col justify-between">
+            {/* Left side: Illustration/Info - Hide on small screens, show on medium and up */}
+            <div className="hidden md:flex md:w-5/12 bg-primary/5 p-6 md:p-8 lg:p-12 flex-col justify-between">
               <div>
-                <Link to="/" className="flex items-center mb-8">
-                  <Train className="h-6 w-6 mr-2 text-primary" />
-                  <span className="font-heading font-semibold text-lg">IRCTC</span>
+                <Link to="/" className="flex items-center mb-6 md:mb-8">
+                  <Train className="h-5 w-5 md:h-6 md:w-6 mr-2 text-primary" />
+                  <span className="font-heading font-semibold text-base md:text-lg">IRCTC</span>
                 </Link>
                 
-                <h2 className="text-2xl font-bold mb-4">Welcome to the future of train travel</h2>
-                <p className="text-muted-foreground mb-6">
+                <h2 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Welcome to the future of train travel</h2>
+                <p className="text-muted-foreground text-sm md:text-base mb-4 md:mb-6">
                   Login to access your account, manage bookings, and enjoy a seamless train booking experience.
                 </p>
                 
-                <div className="space-y-4">
+                <div className="space-y-3 md:space-y-4">
                   {[
                     "Quick and easy ticket booking",
                     "Real-time train tracking",
@@ -267,23 +266,36 @@ const Login = () => {
                       <div className="h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-3">
                         <CheckCircle className="h-3 w-3" />
                       </div>
-                      <span className="text-sm">{feature}</span>
+                      <span className="text-xs md:text-sm">{feature}</span>
                     </div>
                   ))}
                 </div>
               </div>
               
-              <div className="mt-12 lg:mt-0">
+              <div className="mt-8 md:mt-12 lg:mt-0">
                 <p className="text-xs text-muted-foreground">
                   By continuing, you agree to our <a href="#" className="text-primary hover:underline">Terms of Service</a> and <a href="#" className="text-primary hover:underline">Privacy Policy</a>.
                 </p>
               </div>
             </div>
             
+            {/* Mobile header - Only show on small screens */}
+            <div className="md:hidden bg-primary/5 p-6">
+              <Link to="/" className="flex items-center mb-4">
+                <Train className="h-5 w-5 mr-2 text-primary" />
+                <span className="font-heading font-semibold text-base">IRCTC</span>
+              </Link>
+              
+              <h2 className="text-xl font-bold mb-2">Welcome back</h2>
+              <p className="text-muted-foreground text-sm">
+                Login to access your account and bookings
+              </p>
+            </div>
+            
             {/* Right side: Login/Signup Forms */}
-            <div className="lg:w-7/12 bg-white p-8 lg:p-12">
+            <div className="lg:w-7/12 bg-white p-6 md:p-8 lg:p-12">
               <Tabs defaultValue="login" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-8">
+                <TabsList className="grid w-full grid-cols-2 mb-6 md:mb-8">
                   <TabsTrigger value="login">Login</TabsTrigger>
                   <TabsTrigger value="signup">Sign Up</TabsTrigger>
                 </TabsList>
@@ -312,10 +324,10 @@ const Login = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <div className="flex justify-between">
+                      <div className="flex justify-between items-center">
                         <Label htmlFor="password">Password</Label>
-                        <a href="#" className="text-sm text-primary hover:underline">
-                          Forgot password?
+                        <a href="#" className="text-xs md:text-sm text-primary hover:underline">
+                          Forgot?
                         </a>
                       </div>
                       <div className="relative">
@@ -351,13 +363,13 @@ const Login = () => {
                         checked={loginForm.rememberMe}
                         onChange={(e) => setLoginForm({...loginForm, rememberMe: e.target.checked})}
                       />
-                      <Label htmlFor="remember-me" className="text-sm font-normal">
+                      <Label htmlFor="remember-me" className="text-xs md:text-sm font-normal">
                         Remember me for 30 days
                       </Label>
                     </div>
                     
                     <Button type="submit" className="w-full" disabled={loading}>
-                      {loading ? 'Signing in...' : 'Sign in to your account'}
+                      {loading ? 'Signing in...' : 'Sign in'}
                     </Button>
                   </form>
                 </TabsContent>
@@ -434,25 +446,32 @@ const Login = () => {
                       )}
                     </div>
                     
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-start space-x-2">
                       <input
                         type="checkbox"
                         id="agree-terms"
-                        className="rounded border-gray-300 text-primary focus:ring-primary/30"
+                        className="rounded border-gray-300 text-primary focus:ring-primary/30 mt-1"
                         checked={signupForm.agreeTerms}
                         onChange={(e) => setSignupForm({...signupForm, agreeTerms: e.target.checked})}
                       />
-                      <Label htmlFor="agree-terms" className="text-sm font-normal">
+                      <Label htmlFor="agree-terms" className="text-xs md:text-sm font-normal">
                         I agree to the <a href="#" className="text-primary hover:underline">Terms of Service</a> and <a href="#" className="text-primary hover:underline">Privacy Policy</a>
                       </Label>
                     </div>
                     
                     <Button type="submit" className="w-full" disabled={loading}>
-                      {loading ? 'Creating account...' : 'Create an account'}
+                      {loading ? 'Creating account...' : 'Create account'}
                     </Button>
                   </form>
                 </TabsContent>
               </Tabs>
+              
+              {/* Mobile footer - Only show on small screens */}
+              <div className="mt-6 pt-6 border-t border-gray-100 text-center md:hidden">
+                <p className="text-xs text-muted-foreground">
+                  By continuing, you agree to our <a href="#" className="text-primary hover:underline">Terms</a> and <a href="#" className="text-primary hover:underline">Privacy Policy</a>.
+                </p>
+              </div>
             </div>
           </div>
         </div>
