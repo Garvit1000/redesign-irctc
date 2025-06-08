@@ -22,11 +22,6 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
 
 
 
-
-
-
-
-
   useEffect(() => {
     // Memoize DOM references
     const trainElement = trainRef.current;
@@ -266,7 +261,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
           background="transparent"
           minSize={0.6}
           maxSize={1.4}
-          particleDensity={window.innerWidth < 768 ? 60 : 100}
+          particleDensity={typeof window !== 'undefined' && window.innerWidth < 768 ? 60 : 100}
           className="w-full h-full"
           particleColor="#1897ff"
         />
@@ -404,7 +399,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
             </div>
             
             {/* Passenger cars - adjust for mobile and show fewer on small screens */}
-            {[...Array(window.innerWidth < 640 ? 1 : 2)].map((_, index) => (
+            {[...Array(typeof window !== 'undefined' && window.innerWidth < 640 ? 1 : 2)].map((_, index) => (
               <div key={index} className="relative h-12 md:h-16 w-14 md:w-20 bg-gradient-to-b from-primary/80 to-primary rounded-sm flex-shrink-0 mr-2 border border-primary/80 shadow-md overflow-hidden">
                 {/* Car body details */}
                 <div className="absolute inset-0">
