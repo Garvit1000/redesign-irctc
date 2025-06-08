@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChevronRight, Star, MapPin, Sparkles, TramFront, TrainTrack, } from 'lucide-react';
+import { ChevronRight, Star, Sparkles, TramFront, TrainTrack, } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { BackgroundBeams, SparklesCore, TextGenerateEffect, TypewriterEffect } from '@/components/ui/aceternity';
@@ -19,83 +19,13 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
   const redLightRef = useRef<HTMLDivElement>(null);
   const yellowLightRef = useRef<HTMLDivElement>(null);
   const greenLightRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
 
-  // Form state
-  const [fromStation, setFromStation] = useState('');
-  const [toStation, setToStation] = useState('');
-  const [date, setDate] = useState<Date | undefined>(new Date());
-  const [formErrors, setFormErrors] = useState({
-    fromStation: '',
-    toStation: '',
-    date: ''
-  });
 
-  // Sample station suggestions
-  const stationSuggestions = [
-    "Delhi (DLI)",
-    "Mumbai Central (MMCT)",
-    "Chennai Central (MAS)",
-    "Kolkata (KOAA)",
-    "Bangalore (SBC)",
-    "Hyderabad (HYD)",
-    "Ahmedabad (ADI)",
-    "Pune (PUNE)",
-    "Jaipur (JP)",
-    "Lucknow (LKO)",
-    "Chandigarh (CDG)",
-    "Bhubaneswar (BBS)",
-    "Guwahati (GHY)",
-    "Patna (PNBE)",
-    "Kochi (ERS)"
-  ];
 
-  // Handle form submission
-  const handleSearch = () => {
-    // Reset errors
-    const errors = {
-      fromStation: '',
-      toStation: '',
-      date: ''
-    };
-    
-    // Validate form
-    let isValid = true;
-    
-    if (!fromStation) {
-      errors.fromStation = 'Please select a departure station';
-      isValid = false;
-    }
-    
-    if (!toStation) {
-      errors.toStation = 'Please select an arrival station';
-      isValid = false;
-    }
-    
-    if (fromStation && toStation && fromStation === toStation) {
-      errors.toStation = 'Departure and arrival stations cannot be the same';
-      isValid = false;
-    }
-    
-    if (!date) {
-      errors.date = 'Please select a date';
-      isValid = false;
-    }
-    
-    setFormErrors(errors);
-    
-    if (isValid) {
-      // Navigate to search results with query params
-      navigate(`/search-trains?from=${encodeURIComponent(fromStation)}&to=${encodeURIComponent(toStation)}&date=${date?.toISOString().split('T')[0]}`);
-    }
-  };
 
-  // Swap stations function
-  const handleSwapStations = () => {
-    const temp = fromStation;
-    setFromStation(toStation);
-    setToStation(temp);
-  };
+
+
+
 
   useEffect(() => {
     // Memoize DOM references
